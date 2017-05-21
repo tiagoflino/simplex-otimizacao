@@ -31,7 +31,7 @@ public class SimplexController extends HttpServlet {
         String action = request.getParameter("action");
        
         
-        
+        //checa o parametro recebido no POST e toma a acao adequada
         
         if (action == null) {
         
@@ -135,35 +135,15 @@ public class SimplexController extends HttpServlet {
     			
     		}
     		
-    		
+    		//imprime no console (Debug)
     		modelo.imprimeResultado();
     		
     		
     		
     		String resultado = retornaResultado(modelo);
     		
-    		/*
-    		try{
-    			request.setAttribute("resultado", resultado);
-    		 }catch (Exception e) {  
-    	            request.setAttribute("msg", "Erro: " + e.getMessage());  
     	
-    	         }  
-    		
-    		RequestDispatcher rd = null;
-            
-          
-            rd = request.getRequestDispatcher("public/resultado.jsp");
-            
-        	
-            try {
-                rd.forward(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    		*/
-    		
-    		
+    		//Retorna o resultado no formato JSON para o front-end
     		
     		try {
     		    response.setContentType("application/json");  
@@ -183,7 +163,10 @@ public class SimplexController extends HttpServlet {
     		
     private String retornaResultado(Modelo m){
 		
-		String resultado = null;
+		
+    	//Pega o valor da tabela (ML) e do cabecalho e preenche a variavel de resultado 
+    	
+    	String resultado = null;
 		
 		//Ajusta o valor de Z * -1
 		if(m.getTabela(0,0)<0){
@@ -205,29 +188,21 @@ public class SimplexController extends HttpServlet {
     	try{  
             
          
-            //RequestDispatcher rd = null;
-                              
-            
-            
             String varDecisao = request.getParameter("decisao");  
             String varRestricao = request.getParameter("restricao");  
             
             request.setAttribute("varDecisao", varDecisao);
             request.setAttribute("varRestricao", varRestricao);
-            //rd = request.getRequestDispatcher("public/monta_matriz.jsp");
-            //request.getRequestDispatcher("public/monta_matriz.jsp").forward(request, response);  
              
               
          }catch (Exception e) {  
             request.setAttribute("msg", "Erro: " + e.getMessage());  
-          //  request.getRequestDispatcher("index.jsp").forward(request, response);  
+            
          }  
 
     	
-    	//deletar
+    	
     	RequestDispatcher rd = null;
-        
-        //request.setAttribute("varDecisao", value);
         
         rd = request.getRequestDispatcher("public/monta_matriz.jsp");
         
